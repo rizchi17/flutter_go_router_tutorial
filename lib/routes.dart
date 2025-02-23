@@ -57,6 +57,7 @@ final goRouter = GoRouter(
       path: '/b-details',
       name: 'bDetails',
       pageBuilder: (context, state) {
+        // 遷移時のアニメーションもここで設定できる
         return CustomTransitionPage(
           key: state.pageKey,
           child: BDetailsPage(title: state.extra as String),
@@ -79,13 +80,16 @@ final goRouter = GoRouter(
   // リダイレクト
   // 遷移のたびに現在の状態を確認し、条件に応じてリダイレクトが実行される
   redirect: (BuildContext context, GoRouterState state) {
-    // 例：ユーザー認証でサインインしていなかったらサインイン画面に遷移させる
+    // 例：起動時にユーザー認証でサインインしていなかったらサインイン画面に遷移させる
     bool isSignedIn = Random().nextBool(); //認証状況をランダムに設定
-    if (!isSignedIn) {
-      return '/signin';
+    if (state.fullPath == '/') {
+      if (!isSignedIn) {
+        return '/signin';
+      }
     } else {
       // 該当しない場合は意図した先に遷移
       return null;
     }
+    return null;
   },
 );
