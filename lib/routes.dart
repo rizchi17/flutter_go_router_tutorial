@@ -22,6 +22,46 @@ final goRouter = GoRouter(
           child: HomePage(),
         );
       },
+      routes: [
+        GoRoute(
+          path: 'a',
+          name: 'a',
+          pageBuilder: (context, state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: const APage(),
+            );
+          },
+        ),
+        GoRoute(
+          path: 'b',
+          name: 'b',
+          pageBuilder: (context, state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: const BPage(),
+            );
+          },
+          // ネストされたルーティングを設定できる
+          // 親子関係を表現できる
+          routes: [
+            GoRoute(
+              path: '/details',
+              name: 'bDetails',
+              pageBuilder: (context, state) {
+                // 遷移時のアニメーションもここで設定できる
+                return CustomTransitionPage(
+                  key: state.pageKey,
+                  child: BDetailsPage(title: state.extra as String),
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+      ],
     ),
     GoRoute(
       path: '/signin',
@@ -30,40 +70,6 @@ final goRouter = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: SignInPage(),
-        );
-      },
-    ),
-    GoRoute(
-      path: '/a',
-      name: 'a',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          key: state.pageKey,
-          child: const APage(),
-        );
-      },
-    ),
-    GoRoute(
-      path: '/b',
-      name: 'b',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          key: state.pageKey,
-          child: const BPage(),
-        );
-      },
-    ),
-    GoRoute(
-      path: '/b-details',
-      name: 'bDetails',
-      pageBuilder: (context, state) {
-        // 遷移時のアニメーションもここで設定できる
-        return CustomTransitionPage(
-          key: state.pageKey,
-          child: BDetailsPage(title: state.extra as String),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(opacity: animation, child: child);
-          },
         );
       },
     ),

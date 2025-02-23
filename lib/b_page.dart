@@ -25,7 +25,7 @@ class _BPageState extends State<BPage> {
               child: Text('pop to Home Page'),
             ),
             ElevatedButton(
-              onPressed: () => context.push('/b-details', extra: 'B details Page'),
+              onPressed: () => context.push('/b/details', extra: 'B details Page'),
               child: Text('push to B Page'),
             ),
           ],

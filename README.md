@@ -26,4 +26,11 @@
 `context.go('/details?id=123');`
 
 ## go_router 以外のルーター
+- Navigator: Flutterの標準的な画面遷移
+- GetX: パッケージ
+- Fluro: パッケージ
+- AutoRoute: パッケージ
+
+# やってみたいこと
+- Deep link
 
