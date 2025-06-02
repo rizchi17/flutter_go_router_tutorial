@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class ErrorPage extends StatelessWidget {
+  const ErrorPage({super.key, required this.errorMessage});
+  final String errorMessage;
 
-  @override
-  State<SignInPage> createState() => _SignInPageState();
-}
-
-class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text('SignIn Page'),
+        title: Text('Error Page'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text('404 Not Found', style: TextStyle(fontSize: 24)),
+            SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => context.go('/'),
-              child: Text('go to Home Page'),
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('Go Back'),
             ),
           ],
         ),

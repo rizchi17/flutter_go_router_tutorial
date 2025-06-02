@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_go_router_tutorial/provider/authentication_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BDetailsPage extends StatefulWidget {
+class BDetailsPage extends ConsumerStatefulWidget {
   const BDetailsPage({super.key, required this.title});
   final String title;
 
   @override
-  State<BDetailsPage> createState() => _BDetailsPageState();
+  ConsumerState<BDetailsPage> createState() => _BDetailsPageState();
 }
 
-class _BDetailsPageState extends State<BDetailsPage> {
+class _BDetailsPageState extends ConsumerState<BDetailsPage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -37,8 +38,10 @@ class _BDetailsPageState extends State<BDetailsPage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             ElevatedButton(
-              onPressed: () => context.go('/'),
-              child: Text('go to Home Page'),
+              onPressed: () {
+                ref.read(authNotifierProvider.notifier).logOut();
+              },
+              child: Text('Log Out'),
             ),
           ],
         ),
